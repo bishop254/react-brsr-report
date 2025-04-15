@@ -10,7 +10,14 @@ const PrincipleFivePreview = () => {
           marginBottom: "2rem",
         }}
       >
-        <p style={{ fontWeight: "bold", color: "black", marginBottom: "1rem" }}>
+        <p
+          style={{
+            fontWeight: "bold",
+            color: "black",
+            textAlign: "center",
+            marginBottom: "1rem",
+          }}
+        >
           PRINCIPLE 5 - BUSINESSES SHOULD RESPECT AND PROMOTE HUMAN RIGHTS
         </p>
         <p
@@ -668,6 +675,220 @@ const PrincipleFivePreview = () => {
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <div
+        style={{
+          maxWidth: "900px",
+          margin: "auto",
+          marginBottom: "2rem",
+        }}
+      >
+        <p
+          style={{
+            fontWeight: "bold",
+            color: "black",
+            marginBottom: "1rem",
+          }}
+        >
+          8. Mechanisms to prevent adverse consequences to the complainant in
+          discrimination and harassment cases.
+        </p>
+        <p
+          style={{
+            fontWeight: "bold",
+            color: "black",
+            marginBottom: "1rem",
+          }}
+        >
+          9. Do human rights requirements form part of your business agreements
+          and contracts? (Yes/No)
+        </p>
+        <p
+          style={{
+            fontWeight: "bold",
+            color: "black",
+            marginBottom: "1rem",
+          }}
+        >
+          10. Assessments for the year:
+        </p>
+        <table
+          border={1}
+          cellPadding={8}
+          style={{
+            borderCollapse: "collapse",
+            width: "100%",
+            textAlign: "left",
+          }}
+        >
+          <thead>
+            <tr>
+              <th style={{ width: "50%" }}>&nbsp;</th>
+              <th>
+                % of offices that were assessed (by entity or statutory
+                authorities or third parties)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style={{ fontWeight: "bold" }}>Child labour</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bold" }}>Forced/ involuntary labour</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bold" }}>Sexual harassment</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bold" }}>
+                Discrimination at workplace
+              </td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bold" }}>Wages</td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        style={{
+          maxWidth: "900px",
+          margin: "auto",
+          marginBottom: "2rem",
+        }}
+      >
+        <p
+          style={{
+            fontWeight: "bold",
+            color: "black",
+            marginBottom: "1rem",
+          }}
+        >
+          11. Provide details of any corrective actions taken or underway to
+          address significant risks/concerns arising from the assessments at
+          Question 9 above.
+        </p>
+      </div>
+
+      <div
+        style={{
+          maxWidth: "900px",
+          margin: "auto",
+          marginBottom: "2rem",
+        }}
+      >
+        <p
+          style={{
+            fontWeight: "bold",
+            color: "blue",
+            textAlign: "center",
+            marginBottom: "10rem",
+          }}
+        >
+          Leadership Indicators
+        </p>
+        <p style={{ fontWeight: "bold", color: "black", marginBottom: "1rem" }}>
+          1. Details of a business process being modified/introduced because of
+          addressing human rights grievances/complaints.
+        </p>
+        <p style={{ fontWeight: "bold", color: "black", marginBottom: "1rem" }}>
+          2. Details of the scope and coverage of any Human rights due diligence
+          conducted
+        </p>
+        <p style={{ fontWeight: "bold", color: "black", marginBottom: "1rem" }}>
+          3. Is the premise/office of the entity accessible to differently abled
+          visitors, as per the requirements of the Rights of Persons with
+          Disabilities Act, 2016?
+        </p>
+      </div>
+
+      <div
+        style={{
+          maxWidth: "900px",
+          margin: "auto",
+          marginBottom: "2rem",
+        }}
+      >
+        <p
+          style={{
+            fontWeight: "bold",
+            color: "black",
+            marginBottom: "1rem",
+          }}
+        >
+          4. Details on assessment of value chain partners:
+        </p>
+        <table
+          border={1}
+          cellPadding={8}
+          style={{
+            borderCollapse: "collapse",
+            width: "100%",
+            textAlign: "left",
+          }}
+        >
+          <thead>
+            <tr>
+              <th style={{ width: "50%" }}>&nbsp;</th>
+              <th>
+                % Of value chain partners (by value of business done with such
+                partners) that were assessed
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style={{ fontWeight: "bold" }}>Child labour</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bold" }}>Forced/ involuntary labour</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bold" }}>Sexual harassment</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bold" }}>
+                Discrimination at workplace
+              </td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bold" }}>Wages</td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        style={{
+          maxWidth: "900px",
+          margin: "auto",
+          marginBottom: "5rem",
+        }}
+      >
+        <p
+          style={{
+            fontWeight: "bold",
+            color: "black",
+            marginBottom: "1rem",
+          }}
+        >
+          5. Provide details of any corrective actions taken or underway to
+          address significant risks/concerns arising from the assessments at
+          Question 4 above.
+        </p>
       </div>
     </div>
   );
