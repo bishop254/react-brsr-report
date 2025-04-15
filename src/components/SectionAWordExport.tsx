@@ -30,7 +30,7 @@ const SectionAPreview = () => {
   ];
 
   return (
-    <div>
+    <div style={{ minHeight: "80vh" }}>
       <h3 style={{ textAlign: "center", fontWeight: "bold" }}>
         SECTION A: GENERAL DISCLOSURES
       </h3>
@@ -590,6 +590,297 @@ const SectionAPreview = () => {
               <td></td>
               <td></td>
             </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        style={{
+          maxWidth: "900px",
+          margin: "auto",
+        }}
+      >
+        <p style={{ fontWeight: "bold", color: "blue", marginBottom: "1rem" }}>
+          V. Holding, Subsidiary and Associate Companies (including joint
+          ventures)
+        </p>
+        <p style={{ fontWeight: "bold", color: "black", marginBottom: "1rem" }}>
+          21.
+        </p>
+        <p style={{ fontWeight: "bold", color: "black", marginBottom: "1rem" }}>
+          1. Names of holding/subsidiary / associate companies / joint ventures:
+        </p>
+        <table
+          border={1}
+          cellPadding={8}
+          style={{
+            borderCollapse: "collapse",
+            width: "100%",
+            textAlign: "left",
+          }}
+        >
+          <thead>
+            <tr>
+              <th rowSpan={2} style={{ width: "5%" }}>
+                S. No.
+              </th>
+              <th rowSpan={2} style={{ width: "25%" }}>
+                Name of Holding/ Subsidiary/ Associate Companies/ Joint Venture
+                (A)
+              </th>
+              <th rowSpan={2} style={{ width: "10%" }}>
+                Indicate whether Holding/ Subsidiary/ Associate/Joi nt Venture
+              </th>
+              <th colSpan={2} style={{ width: "20%" }}>
+                % Of shares held by listed entity
+              </th>
+              <th colSpan={2} style={{ width: "20%" }}>
+                Does the entity indicated in column A, participate in the
+                Business Responsibility initiatives of the listed entity?
+                (Yes/No)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        style={{
+          maxWidth: "900px",
+          margin: "auto",
+        }}
+      >
+        <p style={{ fontWeight: "bold", color: "blue", marginBottom: "1rem" }}>
+          VI. CSR Details
+        </p>
+        <p style={{ fontWeight: "bold", color: "black", marginBottom: "1rem" }}>
+          22. (i) Whether CSR is applicable as per section 135 of Companies Act,
+          2013: Yes
+        </p>
+        <p
+          style={{
+            fontWeight: "bold",
+            color: "black",
+            marginBottom: "1rem",
+            marginLeft: "2rem",
+          }}
+        >
+          a. Turnover (in Rs.):
+        </p>
+        <p
+          style={{
+            fontWeight: "bold",
+            color: "black",
+            marginBottom: "1rem",
+            marginLeft: "2rem",
+          }}
+        >
+          b. Net worth (in Rs.):
+        </p>
+        <div style={{ marginBottom: "8rem" }}>&nbsp;</div>
+      </div>
+
+      <div
+        style={{
+          maxWidth: "900px",
+          margin: "auto",
+        }}
+      >
+        <p style={{ fontWeight: "bold", color: "blue", marginBottom: "1rem" }}>
+          VII. Transparency and Disclosures Compliances
+        </p>
+        <p style={{ fontWeight: "bold", color: "black", marginBottom: "1rem" }}>
+          23. Complaints/grievances on any of the principles (Principles 1 to 9)
+          under the National Guidelines on Responsible Business Conduct (NGRBC)
+        </p>
+        <p style={{ fontWeight: "bold", color: "black", marginBottom: "1rem" }}>
+          1. Names of holding/subsidiary / associate companies / joint ventures:
+        </p>
+        <table
+          border={1}
+          cellPadding={8}
+          style={{
+            borderCollapse: "collapse",
+            width: "100%",
+            textAlign: "left",
+          }}
+        >
+          <thead>
+            <tr>
+              <th colSpan={6} style={{ textAlign: "center" }}>
+                Complaints/Grievances on any of the principles (Principles 1 to
+                9) under the National Guidelines on Responsible Business Conduct
+              </th>
+            </tr>
+            <tr>
+              <th rowSpan={2}>
+                Stakeholder group from whom complaint is received
+              </th>
+              <th rowSpan={2}>
+                Grievance Redressal Mechanism in Place (Yes/No)
+              </th>
+              <th colSpan={2}>FY 2024-25</th>
+              <th colSpan={2}>FY 2023-24</th>
+            </tr>
+            <tr>
+              <th>Number of complaints filed during the year</th>
+              <th>
+                Number of complaints pending resolution at close of the year
+              </th>
+              <th>Number of complaints filed during the year</th>
+              <th>
+                Number of complaints pending resolution at close of the year
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Communities</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Investors (other than shareholders)</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Shareholders</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Employees and Workers</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Customers</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Value Chain Partners</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        style={{
+          maxWidth: "900px",
+          margin: "auto",
+        }}
+      >
+        <p style={{ fontWeight: "bold", color: "black", marginBottom: "1rem" }}>
+          24. Overview of the entity’s material responsible business conduct
+          issues
+        </p>
+        <p
+          style={{ fontWeight: "normal", color: "black", marginBottom: "1rem" }}
+        >
+          Please indicate material responsible business conduct and
+          sustainability issues pertaining to environmental and social matters
+          that present a risk or an opportunity to your business, rationale for
+          identifying the same, approach to adapt or mitigate the risk*:
+        </p>
+        <table
+          border={1}
+          cellPadding={8}
+          style={{
+            borderCollapse: "collapse",
+            width: "100%",
+            textAlign: "left",
+          }}
+        >
+          <thead>
+            <tr>
+              <th>S. No.</th>
+              <th>Material issue identified</th>
+              <th>Indicate whether risk or opportunity (R/O)</th>
+              <th>Rationale for identifying the risk / opportunity</th>
+              <th>In case of risk, approach to adapt or mitigate.</th>
+              <th>
+                Financial implications of the risk or opportunity <br />
+                (Indicate positive or negative implications)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {Array.from({ length: 10 }, (_, i) => (
+              <tr key={i}>
+                <td>{i + 1}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

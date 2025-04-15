@@ -1,5 +1,5 @@
 // App.tsx
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "./App.css";
 import { Button } from "primereact/button";
@@ -10,11 +10,17 @@ import "primereact/resources/primereact.min.css";
 
 // 🔥 Import your Section A form component
 import SectionAWordExport from "./components/SectionAWordExport";
+import SectionBWordExport from "./components/SectionBWordExport";
+import PrincipleOne from "./components/PrincipleOne";
+import PrincipleTwo from "./components/PrincipleTwo";
+import PrincipleThree from "./components/PrincipleThree";
+import PrincipleFour from "./components/PrincipleFour";
+import PrincipleFive from "./components/PrincipleFive";
 
 const principles = [
   "SECTION A: GENERAL DISCLOSURES",
   "SECTION B: MANAGEMENT AND PROCESS DISCLOSURES",
-  "SECTION C: PRINCIPLE-WISE PERFORMANCE DISCLOSURE",
+  // "SECTION C: PRINCIPLE-WISE PERFORMANCE DISCLOSURE",
   "PRINCIPLE 1: BUSINESSES SHOULD CONDUCT AND GOVERN...",
   "PRINCIPLE 2: BUSINESSES SHOULD PROVIDE GOODS AND SERVICES...",
   "PRINCIPLE 3: BUSINESSES SHOULD RESPECT AND PROMOTE...",
@@ -29,6 +35,39 @@ const principles = [
 function App() {
   const [selected, setSelected] = useState(principles[0]);
   const [isLoading, setIsLoading] = useState(false);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: Array.from({ length: 11 }, (_, i) => i * 0.1), // 0.0 to 1.0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      const visibleEntries = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio); // Most visible first
+
+      if (visibleEntries.length > 0) {
+        const mostVisible = visibleEntries[0];
+        const sectionTitle = mostVisible.target.getAttribute("data-title");
+        if (sectionTitle) {
+          setSelected(sectionTitle);
+        }
+      }
+    }, options);
+
+    sectionRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      sectionRefs.current.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, []);
 
   const reportStructure = {
     cover: {
@@ -80,7 +119,14 @@ function App() {
             {principles.map((p) => (
               <li
                 key={p}
-                onClick={() => setSelected(p)}
+                onClick={() => {
+                  setSelected(p);
+                  const index = principles.indexOf(p);
+                  sectionRefs.current[index]?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }}
                 className={`principle-item ${selected === p ? "selected" : ""}`}
               >
                 {p}
@@ -90,20 +136,67 @@ function App() {
         </ScrollPanel>
       </div>
 
-      <div className="main-content">
-        <div className="content-card">
-          {selected === "SECTION A: GENERAL DISCLOSURES" ? (
-            <SectionAWordExport />
-          ) : (
-            <Card title={selected}>
-              <p>
-                This is a sample report section for <strong>{selected}</strong>.
-              </p>
-            </Card>
-          )}
-        </div>
+      <div className="main-content scroll-sections">
+        {principles.map((p, index) => (
+          <div
+            key={p}
+            ref={(el: any) => (sectionRefs.current[index] = el)}
+            data-title={p}
+            className="content-card"
+            style={{ minHeight: "80vh", paddingBottom: "2rem" }}
+          >
+            {p === "SECTION A: GENERAL DISCLOSURES" && <SectionAWordExport />}
 
-        <div className="export-buttons">
+            {p === "SECTION B: MANAGEMENT AND PROCESS DISCLOSURES" && (
+              <SectionBWordExport />
+            )}
+
+            {p === "PRINCIPLE 1: BUSINESSES SHOULD CONDUCT AND GOVERN..." && (
+              <PrincipleOne />
+            )}
+
+            {p ===
+              "PRINCIPLE 2: BUSINESSES SHOULD PROVIDE GOODS AND SERVICES..." && (
+              <PrincipleTwo />
+            )}
+
+            {p === "PRINCIPLE 3: BUSINESSES SHOULD RESPECT AND PROMOTE..." && (
+              <PrincipleThree />
+            )}
+
+            {p ===
+              "PRINCIPLE 4: BUSINESSES SHOULD RESPECT THE INTERESTS..." && (
+              <PrincipleFour />
+            )}
+
+            {p ===
+              "PRINCIPLE 5: BUSINESSES SHOULD RESPECT AND PROMOTE HUMAN RIGHTS" && (
+              <PrincipleFive />
+            )}
+
+            {/* {p ===
+              "PRINCIPLE 6: BUSINESSES SHOULD RESPECT AND PROTECT THE ENVIRONMENT" && (
+              <PrincipleSix />
+            )} */}
+
+            {/* {p ===
+              "PRINCIPLE 7: BUSINESSES SHOULD ENGAGE IN POLICY IN A TRANSPARENT WAY" && (
+              <PrincipleSeven />
+            )} */}
+
+            {/* {p ===
+              "PRINCIPLE 8: BUSINESSES SHOULD PROMOTE INCLUSIVE GROWTH" && (
+              <PrincipleEight />
+            )} */}
+
+            {/* {p ===
+              "PRINCIPLE 9: BUSINESSES SHOULD PROVIDE VALUE TO CONSUMERS" && (
+              <PrincipleNine />
+            )} */}
+          </div>
+        ))}
+
+        <div className="export-buttons" style={{ marginTop: "2rem" }}>
           <Button
             label={isLoading ? "Exporting PDF..." : "Export PDF"}
             icon="pi pi-file-pdf"
