@@ -17,6 +17,9 @@ import PrincipleThree from "./components/PrincipleThree";
 import PrincipleFour from "./components/PrincipleFour";
 import PrincipleFive from "./components/PrincipleFive";
 import PrincipleSix from "./components/PrincipleSix";
+import PrincipleSeven from "./components/PrincipleSeven";
+import PrincipleEight from "./components/PrincipleEight";
+import PrincipleNine from "./components/PrincipleNine";
 
 const principles = [
   "SECTION A: GENERAL DISCLOSURES",
@@ -180,20 +183,20 @@ function App() {
               <PrincipleSix />
             )}
 
-            {/* {p ===
+            {p ===
               "PRINCIPLE 7: BUSINESSES SHOULD ENGAGE IN POLICY IN A TRANSPARENT WAY" && (
               <PrincipleSeven />
-            )} */}
+            )}
 
-            {/* {p ===
+            {p ===
               "PRINCIPLE 8: BUSINESSES SHOULD PROMOTE INCLUSIVE GROWTH" && (
               <PrincipleEight />
-            )} */}
+            )}
 
-            {/* {p ===
+            {p ===
               "PRINCIPLE 9: BUSINESSES SHOULD PROVIDE VALUE TO CONSUMERS" && (
               <PrincipleNine />
-            )} */}
+            )}
           </div>
         ))}
 

@@ -1,41 +1,48 @@
-/* Container for the entire report page
 .brsr-report-container {
   display: flex;
   flex-direction: row;
   height: 100vh;
-  background-color: #f7fafc;
+  background-color: #f9fafb;
+  overflow: hidden;
 }
 
 .sidebar {
-  width: 25%;
-  padding: 16px;
-  background-color: white;
-  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  background-color: #ffffff;
+  padding: 1.5rem;
   border-right: 1px solid #e2e8f0;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 16px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
   color: #2d3748;
+  text-align: center;
 }
 
 .sidebar-scroll {
-  height: calc(100vh - 140px);
+  flex: 1;
   overflow-y: auto;
+  padding-right: 0.5rem;
 }
 
 .principles-list {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .principle-item {
-  padding: 12px;
-  font-size: 14px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  color: #4a5568;
+  border-radius: 6px;
+  margin-bottom: 6px;
   cursor: pointer;
-  color: #2d3748;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
@@ -43,74 +50,25 @@
   background-color: #edf2f7;
 }
 
-.selected {
+.principle-item.selected {
   background-color: #3182ce;
   color: white;
-  font-weight: bold;
-}
-
-.main-content {
-  width: 75%;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.content-card {
-  flex: 1;
-  margin-bottom: 16px;
-  overflow-y: auto;
-}
-
-.export-buttons {
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-  margin-top: 24px;
-} */
-
-/* App.css */
-
-.brsr-report-container {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.sidebar {
-  width: 300px;
-  background-color: #f4f4f4;
-  padding: 1rem;
-  overflow-y: auto;
-}
-
-.sidebar-scroll {
-  max-height: calc(100vh - 100px);
-}
-
-.principles-list {
-  list-style: none;
-  padding: 0;
-}
-
-.principle-item {
-  padding: 0.5rem;
-  cursor: pointer;
-}
-
-.principle-item.selected {
-  background-color: #cce5ff;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .main-content {
   flex: 1;
   overflow-y: auto;
   padding: 2rem;
-  scroll-behavior: smooth;
 }
 
 .content-card {
   margin-bottom: 2rem;
+}
+
+.export-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
 }
