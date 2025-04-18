@@ -648,9 +648,11 @@ const SectionAPreview = () => {
               <td></td>
               <td></td>
               <td></td>
+              <td></td>
             </tr>
             <tr>
               <td>2</td>
+              <td></td>
               <td></td>
               <td></td>
               <td></td>
@@ -662,9 +664,11 @@ const SectionAPreview = () => {
               <td></td>
               <td></td>
               <td></td>
+              <td></td>
             </tr>
             <tr>
               <td>4</td>
+              <td></td>
               <td></td>
               <td></td>
               <td></td>
@@ -676,9 +680,11 @@ const SectionAPreview = () => {
               <td></td>
               <td></td>
               <td></td>
+              <td></td>
             </tr>
             <tr>
               <td>6</td>
+              <td></td>
               <td></td>
               <td></td>
               <td></td>
