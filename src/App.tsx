@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import { Button } from "primereact/button";
 import { ScrollPanel } from "primereact/scrollpanel";
@@ -7,8 +7,6 @@ import "primereact/resources/primereact.min.css";
 
 // Export library
 import { saveAs } from "file-saver";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 
 // 🔥 Import your Section components
 import SectionAWordExport from "./components/SectionAWordExport";
