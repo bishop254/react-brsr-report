@@ -1,14 +1,16 @@
-// App.tsx
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import "./App.css";
 import { Button } from "primereact/button";
-import { Card } from "primereact/card";
 import { ScrollPanel } from "primereact/scrollpanel";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 
-// 🔥 Import your Section A form component
+// Export library
+import { saveAs } from "file-saver";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+
+// 🔥 Import your Section components
 import SectionAWordExport from "./components/SectionAWordExport";
 import SectionBWordExport from "./components/SectionBWordExport";
 import PrincipleOne from "./components/PrincipleOne";
@@ -24,7 +26,6 @@ import PrincipleNine from "./components/PrincipleNine";
 const principles = [
   "SECTION A: GENERAL DISCLOSURES",
   "SECTION B: MANAGEMENT AND PROCESS DISCLOSURES",
-  // "SECTION C: PRINCIPLE-WISE PERFORMANCE DISCLOSURE",
   "PRINCIPLE 1: BUSINESSES SHOULD CONDUCT AND GOVERN...",
   "PRINCIPLE 2: BUSINESSES SHOULD PROVIDE GOODS AND SERVICES...",
   "PRINCIPLE 3: BUSINESSES SHOULD RESPECT AND PROMOTE...",
@@ -36,81 +37,75 @@ const principles = [
   "PRINCIPLE 9: BUSINESSES SHOULD PROVIDE VALUE TO CONSUMERS",
 ];
 
+type LoadingType = "pdf" | "word";
+
 function App() {
+  const [loadingType, setLoadingType] = useState<LoadingType | null>(null);
   const [selected, setSelected] = useState(principles[0]);
-  const [isLoading, setIsLoading] = useState(false);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const options = {
       root: null,
       rootMargin: "0px",
-      threshold: Array.from({ length: 11 }, (_, i) => i * 0.1), // 0.0 to 1.0
+      threshold: Array.from({ length: 11 }, (_, i) => i * 0.1),
     };
-
     const observer = new IntersectionObserver((entries) => {
-      const visibleEntries = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio); // Most visible first
-
-      if (visibleEntries.length > 0) {
-        const mostVisible = visibleEntries[0];
-        const sectionTitle = mostVisible.target.getAttribute("data-title");
-        if (sectionTitle) {
-          setSelected(sectionTitle);
-        }
+      const visible = entries.filter((e) => e.isIntersecting);
+      if (visible.length) {
+        const top = visible.sort(
+          (a, b) => b.intersectionRatio - a.intersectionRatio
+        )[0];
+        const title = top.target.getAttribute("data-title");
+        if (title) setSelected(title);
       }
     }, options);
-
-    sectionRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-
-    return () => {
-      sectionRefs.current.forEach((ref) => {
-        if (ref) observer.unobserve(ref);
-      });
-    };
+    sectionRefs.current.forEach((ref) => ref && observer.observe(ref));
+    return () =>
+      sectionRefs.current.forEach((ref) => ref && observer.unobserve(ref));
   }, []);
 
-  const reportStructure = {
-    cover: {
-      title: "Business Responsibility and Sustainability Report",
-      year: "2024",
-      company: "Your Company Name",
-    },
-    index: principles,
-    sections: principles.map((p) => ({
-      title: p,
-      content: `Placeholder content for ${p}.`,
-      formulaData: {},
-    })),
-    selected,
+  const exportWord = () => {
+    setLoadingType("word");
+    setTimeout(() => {
+      try {
+        const element = document.getElementById("report-content")!;
+        const html = element.outerHTML;
+        const css = `
+        <style>
+          table { width:100%; border-collapse:collapse; }
+          th, td { border:1px solid #333; padding:6px; }
+        </style>`;
+        const fullDoc = `<!DOCTYPE html><html><head><meta charset='utf-8'/>${css}</head><body>${html}</body></html>`;
+        const blob = new Blob([fullDoc], {
+          type: "application/msword;charset=utf-8",
+        });
+        saveAs(blob, "BRSR_Report.doc");
+      } catch (e) {
+        console.error(e);
+        alert("Word export failed");
+      } finally {
+        setLoadingType(null);
+      }
+    }, 100);
   };
 
-  const exportReport = async (type: string) => {
-    setIsLoading(true);
+  const exportPDF = async () => {
+    setLoadingType("pdf");
     try {
-      const fileName = type === "pdf" ? "BRSR_Report.pdf" : "BRSR_Report.docx";
-      const response = await axios.post(
-        `http://127.0.0.1:3000/report/download/${type}`,
-        reportStructure,
-        { responseType: "blob" }
-      );
-
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", fileName);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      alert("Failed to download report");
-      console.error(error);
+      const element = document.getElementById("report-content")!;
+      const canvas = await html2canvas(element, { scale: 2 });
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF({ unit: "pt", format: "a4" });
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save("BRSR_Report.pdf");
+    } catch (e) {
+      console.error(e);
+      alert("PDF export failed");
     } finally {
-      setIsLoading(false);
+      setLoadingType(null);
     }
   };
 
@@ -125,8 +120,8 @@ function App() {
                 key={p}
                 onClick={() => {
                   setSelected(p);
-                  const index = principles.indexOf(p);
-                  sectionRefs.current[index]?.scrollIntoView({
+                  const idx = principles.indexOf(p);
+                  sectionRefs.current[idx]?.scrollIntoView({
                     behavior: "smooth",
                     block: "start",
                   });
@@ -140,80 +135,45 @@ function App() {
         </ScrollPanel>
       </div>
 
-      <div className="main-content scroll-sections">
-        {principles.map((p, index) => (
+      <div id="report-content" className="main-content scroll-sections">
+        {principles.map((p, i) => (
           <div
             key={p}
-            ref={(el: any) => (sectionRefs.current[index] = el)}
+            ref={(el: any) => (sectionRefs.current[i] = el)}
             data-title={p}
             className="content-card"
             style={{ minHeight: "80vh", paddingBottom: "2rem" }}
           >
             {p === "SECTION A: GENERAL DISCLOSURES" && <SectionAWordExport />}
-
             {p === "SECTION B: MANAGEMENT AND PROCESS DISCLOSURES" && (
               <SectionBWordExport />
             )}
-
-            {p === "PRINCIPLE 1: BUSINESSES SHOULD CONDUCT AND GOVERN..." && (
-              <PrincipleOne />
-            )}
-
-            {p ===
-              "PRINCIPLE 2: BUSINESSES SHOULD PROVIDE GOODS AND SERVICES..." && (
-              <PrincipleTwo />
-            )}
-
-            {p === "PRINCIPLE 3: BUSINESSES SHOULD RESPECT AND PROMOTE..." && (
-              <PrincipleThree />
-            )}
-
-            {p ===
-              "PRINCIPLE 4: BUSINESSES SHOULD RESPECT THE INTERESTS..." && (
-              <PrincipleFour />
-            )}
-
-            {p ===
-              "PRINCIPLE 5: BUSINESSES SHOULD RESPECT AND PROMOTE HUMAN RIGHTS" && (
-              <PrincipleFive />
-            )}
-
-            {p ===
-              "PRINCIPLE 6: BUSINESSES SHOULD RESPECT AND PROTECT THE ENVIRONMENT" && (
-              <PrincipleSix />
-            )}
-
-            {p ===
-              "PRINCIPLE 7: BUSINESSES SHOULD ENGAGE IN POLICY IN A TRANSPARENT WAY" && (
-              <PrincipleSeven />
-            )}
-
-            {p ===
-              "PRINCIPLE 8: BUSINESSES SHOULD PROMOTE INCLUSIVE GROWTH" && (
-              <PrincipleEight />
-            )}
-
-            {p ===
-              "PRINCIPLE 9: BUSINESSES SHOULD PROVIDE VALUE TO CONSUMERS" && (
-              <PrincipleNine />
-            )}
+            {p.includes("PRINCIPLE 1") && <PrincipleOne />}
+            {p.includes("PRINCIPLE 2") && <PrincipleTwo />}
+            {p.includes("PRINCIPLE 3") && <PrincipleThree />}
+            {p.includes("PRINCIPLE 4") && <PrincipleFour />}
+            {p.includes("PRINCIPLE 5") && <PrincipleFive />}
+            {p.includes("PRINCIPLE 6") && <PrincipleSix />}
+            {p.includes("PRINCIPLE 7") && <PrincipleSeven />}
+            {p.includes("PRINCIPLE 8") && <PrincipleEight />}
+            {p.includes("PRINCIPLE 9") && <PrincipleNine />}
           </div>
         ))}
 
         <div className="export-buttons" style={{ marginTop: "2rem" }}>
           <Button
-            label={isLoading ? "Exporting PDF..." : "Export PDF"}
-            icon="pi pi-file-pdf"
-            onClick={() => exportReport("pdf")}
-            loading={isLoading}
-            severity="danger"
+            label={loadingType === "word" ? "Exporting Word..." : "Export Word"}
+            icon="pi pi-file-word"
+            onClick={exportWord}
+            loading={loadingType === "word"}
+            severity="info"
           />
           <Button
-            label={isLoading ? "Exporting Word..." : "Export Word"}
-            icon="pi pi-file-word"
-            onClick={() => exportReport("word")}
-            loading={isLoading}
-            severity="info"
+            label={loadingType === "pdf" ? "Exporting PDF..." : "Export PDF"}
+            icon="pi pi-file-pdf"
+            onClick={exportPDF}
+            loading={loadingType === "pdf"}
+            severity="danger"
           />
         </div>
       </div>
