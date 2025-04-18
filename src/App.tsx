@@ -92,17 +92,52 @@ function App() {
 
   const exportPDF = async () => {
     setLoadingType("pdf");
+
     try {
-      const element = document.getElementById("report-content")!;
-      const canvas = await html2canvas(element, { scale: 2 });
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF({ unit: "pt", format: "a4" });
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save("BRSR_Report.pdf");
-    } catch (e) {
-      console.error(e);
+      const content = document.getElementById("report-content");
+      if (!content) throw new Error("Report content not found");
+
+      const html = `
+        <html>
+          <head>
+            <style>
+              body { font-family: Arial; padding: 40px; }
+              .page-break { page-break-before: always; }
+              table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+              th, td { border: 1px solid #333; padding: 6px; text-align: left; }
+              h2 { color: #2c3e50; }
+            </style>
+          </head>
+          <body>
+            ${content.innerHTML}
+          </body>
+        </html>
+      `;
+
+      const response = await fetch(
+        "http://localhost:3001/report/download/pdf",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ html }),
+        }
+      );
+
+      if (!response.ok) throw new Error("PDF generation failed");
+
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = "BRSR_Report.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (err) {
+      console.error("PDF export failed", err);
       alert("PDF export failed");
     } finally {
       setLoadingType(null);
