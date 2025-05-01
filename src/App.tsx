@@ -8,22 +8,16 @@ import "primereact/resources/primereact.min.css";
 // Export library
 import { saveAs } from "file-saver";
 
-// 🔥 Import your Section components
-import SectionAWordExport from "./components/SectionAWordExport";
-import SectionBWordExport from "./components/SectionBWordExport";
-import PrincipleOne from "./components/PrincipleOne";
-import PrincipleTwo from "./components/PrincipleTwo";
-import PrincipleThree from "./components/PrincipleThree";
-import PrincipleFour from "./components/PrincipleFour";
-import PrincipleFive from "./components/PrincipleFive";
-import PrincipleSix from "./components/PrincipleSix";
-import PrincipleSeven from "./components/PrincipleSeven";
-import PrincipleEight from "./components/PrincipleEight";
-import PrincipleNine from "./components/PrincipleNine";
+import GRI2 from "./components/GRI2";
+import GRI3 from "./components/GRI3";
+import GRI200 from "./components/GRI200";
+import GRI300 from "./components/GRI300";
 
 const principles = [
-  "SECTION A: GENERAL DISCLOSURES",
-  "SECTION B: MANAGEMENT AND PROCESS DISCLOSURES",
+  "GRI 2",
+  "GRI 3",
+  "GRI 200",
+  "GRI 300",
   "PRINCIPLE 1: BUSINESSES SHOULD CONDUCT AND GOVERN...",
   "PRINCIPLE 2: BUSINESSES SHOULD PROVIDE GOODS AND SERVICES...",
   "PRINCIPLE 3: BUSINESSES SHOULD RESPECT AND PROMOTE...",
@@ -177,8 +171,11 @@ function App() {
             className="content-card"
             style={{ minHeight: "80vh", paddingBottom: "2rem" }}
           >
-            {p === "SECTION A: GENERAL DISCLOSURES" && <SectionAWordExport />}
-            {p === "SECTION B: MANAGEMENT AND PROCESS DISCLOSURES" && (
+            {p === "GRI 2" && <GRI2 />}
+            {p === "GRI 3" && <GRI3 />}
+            {p === "GRI 200" && <GRI200 />}
+            {p === "GRI 300" && <GRI300 />}
+            {/* {p === "SECTION B: MANAGEMENT AND PROCESS DISCLOSURES" && (
               <SectionBWordExport />
             )}
             {p.includes("PRINCIPLE 1") && <PrincipleOne />}
@@ -189,7 +186,7 @@ function App() {
             {p.includes("PRINCIPLE 6") && <PrincipleSix />}
             {p.includes("PRINCIPLE 7") && <PrincipleSeven />}
             {p.includes("PRINCIPLE 8") && <PrincipleEight />}
-            {p.includes("PRINCIPLE 9") && <PrincipleNine />}
+            {p.includes("PRINCIPLE 9") && <PrincipleNine />} */}
           </div>
         ))}
 
