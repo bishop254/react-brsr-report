@@ -12,22 +12,9 @@ import GRI2 from "./components/GRI2";
 import GRI3 from "./components/GRI3";
 import GRI200 from "./components/GRI200";
 import GRI300 from "./components/GRI300";
+import GRI400 from "./components/GRI400";
 
-const principles = [
-  "GRI 2",
-  "GRI 3",
-  "GRI 200",
-  "GRI 300",
-  "PRINCIPLE 1: BUSINESSES SHOULD CONDUCT AND GOVERN...",
-  "PRINCIPLE 2: BUSINESSES SHOULD PROVIDE GOODS AND SERVICES...",
-  "PRINCIPLE 3: BUSINESSES SHOULD RESPECT AND PROMOTE...",
-  "PRINCIPLE 4: BUSINESSES SHOULD RESPECT THE INTERESTS...",
-  "PRINCIPLE 5: BUSINESSES SHOULD RESPECT AND PROMOTE HUMAN RIGHTS",
-  "PRINCIPLE 6: BUSINESSES SHOULD RESPECT AND PROTECT THE ENVIRONMENT",
-  "PRINCIPLE 7: BUSINESSES SHOULD ENGAGE IN POLICY IN A TRANSPARENT WAY",
-  "PRINCIPLE 8: BUSINESSES SHOULD PROMOTE INCLUSIVE GROWTH",
-  "PRINCIPLE 9: BUSINESSES SHOULD PROVIDE VALUE TO CONSUMERS",
-];
+const principles = ["GRI 2", "GRI 3", "GRI 200", "GRI 300", "GRI 400"];
 
 type LoadingType = "pdf" | "word";
 
@@ -72,7 +59,7 @@ function App() {
         const blob = new Blob([fullDoc], {
           type: "application/msword;charset=utf-8",
         });
-        saveAs(blob, "BRSR_Report.doc");
+        saveAs(blob, "GRI_Report.doc");
       } catch (e) {
         console.error(e);
         alert("Word export failed");
@@ -124,7 +111,7 @@ function App() {
 
       const link = document.createElement("a");
       link.href = blobUrl;
-      link.download = "BRSR_Report.pdf";
+      link.download = "GRI_Report.pdf";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -175,18 +162,7 @@ function App() {
             {p === "GRI 3" && <GRI3 />}
             {p === "GRI 200" && <GRI200 />}
             {p === "GRI 300" && <GRI300 />}
-            {/* {p === "SECTION B: MANAGEMENT AND PROCESS DISCLOSURES" && (
-              <SectionBWordExport />
-            )}
-            {p.includes("PRINCIPLE 1") && <PrincipleOne />}
-            {p.includes("PRINCIPLE 2") && <PrincipleTwo />}
-            {p.includes("PRINCIPLE 3") && <PrincipleThree />}
-            {p.includes("PRINCIPLE 4") && <PrincipleFour />}
-            {p.includes("PRINCIPLE 5") && <PrincipleFive />}
-            {p.includes("PRINCIPLE 6") && <PrincipleSix />}
-            {p.includes("PRINCIPLE 7") && <PrincipleSeven />}
-            {p.includes("PRINCIPLE 8") && <PrincipleEight />}
-            {p.includes("PRINCIPLE 9") && <PrincipleNine />} */}
+            {p === "GRI 400" && <GRI400 />}
           </div>
         ))}
 
